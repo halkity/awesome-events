@@ -8,8 +8,8 @@ class EventsController < ApplicationController
 
     if @event.save
       redirect_to @event, notice: "作成しました"
-    else
-      render :new
+    # else
+    #   render :new
     end
 
   end
@@ -17,7 +17,7 @@ class EventsController < ApplicationController
   private
 
   def event_params
-    params.require(:event).permit(:name, :place. :content, :start_at, :end_at)
+    params.require(:event).permit(:name :place, :content, :stard_at, :end_at)
   end
 
 end
