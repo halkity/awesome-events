@@ -4,7 +4,7 @@ one:
   owner_id: 
   name: MyString
   place: MyString
-  stard_at: 2021-01-08 12:54:29
+  start_at: 2021-01-08 12:54:29
   end_at: 2021-01-08 12:54:29
   content: MyText
 
@@ -12,6 +12,6 @@ two:
   owner_id: 
   name: MyString
   place: MyString
-  stard_at: 2021-01-08 12:54:29
+  start_at: 2021-01-08 12:54:29
   end_at: 2021-01-08 12:54:29
   content: MyText
