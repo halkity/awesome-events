@@ -1,4 +1,6 @@
 class Event < ApplicationRecord
+  belongs_to :owner, class_name: "User", foreign_key: "owner_id"
+
   validates :name, length: {maximum: 50}, presence:true
   validates :place, length: {maximum: 50}, presence:true
   validates :content, length: {maximum: 50}, presence:true
