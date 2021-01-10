@@ -13,11 +13,11 @@
   .form-group
     = f.label :start_at
     %div
-      = raw sprintf( f.date_select(:start_at, use_month_numbers: true, start_year: now.year, end_year: now.year + 1, minute_step: 10, class: "form-control", date_separator: '%s'), '年 ', '月 ') + '日'
+      = f.datetime_select(:start_at, use_month_numbers: true, start_year: now.year, end_year: now.year + 1, minute_step: 10, class: "form-control")
   .form-group
     = f.label :end_at
     %div
-      = raw sprintf( f.date_select(:end_at, use_month_numbers: true, start_year: now.year, end_year: now.year + 1, minute_step: 10, class: "form-control", date_separator: '%s'), '年 ', '月 ') + '日'
+      = f.datetime_select(:end_at, use_month_numbers: true, start_year: now.year, end_year: now.year + 1, minute_step: 10, class: "form-control")
   .form-group
     = f.label :content
     = f.text_area :content, class: "form-control", row: 10
