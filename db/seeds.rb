@@ -13,6 +13,12 @@ event_name_array = [
   "朝活",
 ]
 
+event_level = [
+  "（初心者OKです）",
+  "（経験のある方でお願いします）",
+  "（上級者の方向けです）",
+]
+
 # 参加コメント
 comment = [
   "参加します！",
@@ -25,7 +31,7 @@ comment = [
 ]
 
 # ユーザー作成
-30.times do |n|
+99.times do |n|
   user = Faker::Omniauth.github
   User.create!(
     provider: user[:provider],
@@ -37,11 +43,11 @@ end
 
 
 # イベント作成
-users = User.order(:created_at).take(20)
-20.times do |n|
+users = User.order(:created_at).take(30)
+30.times do |n|
   users.each do |user|
     # event_arrayからランダムで一つ取り出す
-    event_name = event_name_array.sample
+    event_name = event_name_array.sample + event_level.sample
     # 月日時分をランダムで取得
     event_month = rand(1..12)
     event_day = rand(1..27)
@@ -63,15 +69,20 @@ end
 users = User.all.sample(20).sort
 # ユーザーを各個取り出す
 users.each do |user|
-  # イベント取得
-  if join_event_ids = user.tickets.includes(:event).pluck(:id)
-    event = Event.where.not("id IN (?) AND owner_id = ?", join_event_ids, user.id).sample
-  else
-    event = Event.where.not("owner_id = ?", user.id).sample
-  end
-  # イベントへの参加処理
-  user.tickets.create! do |t|
-    t.event = event
-    t.comment = comment.sample
+  # 10個のイベント参加する
+  10.times do
+    rondom_comment = comment.sample
+    # イベント取得
+    join_event_ids = user.tickets.includes(:event).pluck(:event_id)
+    if join_event_ids.empty?
+      event = Event.where.not("owner_id = ?", user.id).sample
+    else
+      event = Event.where.not("id IN (?) OR owner_id = ?", join_event_ids, user.id).sample
+    end
+    # イベントへの参加処理
+    user.tickets.create! do |t|
+      t.event = event
+      t.comment = rondom_comment
+    end
   end
 end
