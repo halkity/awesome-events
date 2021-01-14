@@ -15,8 +15,8 @@ event_name_array = [
 
 event_level = [
   "（初心者OKです）",
-  "（経験のある方でお願いします）",
-  "（上級者の方向けです）",
+  "（経験者求む）",
+  "（上級者の方向け）",
 ]
 
 # 参加コメント
@@ -31,7 +31,7 @@ comment = [
 ]
 
 # ユーザー作成
-99.times do |n|
+50.times do |n|
   user = Faker::Omniauth.github
   User.create!(
     provider: user[:provider],
@@ -44,7 +44,7 @@ end
 
 # イベント作成
 users = User.order(:created_at).take(30)
-30.times do |n|
+5.times do |n|
   users.each do |user|
     # event_arrayからランダムで一つ取り出す
     event_name = event_name_array.sample + event_level.sample
@@ -66,7 +66,7 @@ end
 
 # 参加のリレーション
 # ランダムにユーザーを20件複数取得
-users = User.all.sample(20).sort
+users = User.all.sample(30).sort
 # ユーザーを各個取り出す
 users.each do |user|
   # 10個のイベント参加する
