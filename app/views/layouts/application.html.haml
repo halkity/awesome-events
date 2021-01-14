@@ -16,7 +16,9 @@
             = link_to "イベントを作成", new_event_path, class: "nav-link"
           - if logged_in?
             %li.nav-item
-              = link_to "Githubでログアウト", logout_path, class: "nav-link", method: :delete
+              = link_to "退会", new_retirement_path, class: "nav-link"
+            %li.nav-item
+              = link_to "ログアウト", logout_path, class: "nav-link", method: :delete
           - else logged_in?
             %li.nav-item
               = link_to "Githubでログイン", "/auth/github", class: "nav-link", method: :post

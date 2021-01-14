@@ -1,4 +1,6 @@
 class Event < ApplicationRecord
+  has_many :tickets, dependent: :destroy
+  # has_many :join_users, through: :tickets, source: :user
   belongs_to :owner, class_name: "User", foreign_key: "owner_id"
 
   validates :name, length: {maximum: 50}, presence:true
